@@ -1,4 +1,4 @@
-name: CI flow for AmazonECS
+name: CI flow for Amazon ECS
 
 on: [push]
 
@@ -8,39 +8,4 @@ env:
 jobs:
   ci:
     name: ci
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Unit Test
-      run: cd ${{ github.workspace }}
-      run: cd sample-webapp && npm install && npm run test:unit
-
-    # TODO add tests for backend and restapi
-
-    - name: Success
-      uses: rtCamp/action-slack-notify@v2.0.2
-      if: success()
-      env:
-        SLACK_TITLE: CI Flow / success
-        SLACK_COLOR: good
-        SLACK_MESSAGE: Message for success
-
-    - name: Failure
-      uses: rtCamp/action-slack-notify@v2.0.2
-      if: failure()
-      env:
-        SLACK_TITLE: CI Flow / failure
-        SLACK_COLOR: danger
-        SLACK_MESSAGE: Message for failure
-
-    - name: Cancel
-      uses: rtCamp/action-slack-notify@v2.0.2
-      if: canceled()
-      env:
-        SLACK_TITLE: CI Flow / cancel
-        SLACK_COLOR: danger
-        SLACK_MESSAGE: Message for cancel
+    runs-on:
